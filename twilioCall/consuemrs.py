@@ -2,7 +2,13 @@ import json
 from channels.generic.websocket import AsyncWebsocketConsumer
 import websockets
 import asyncio
+from dotenv import load_dotenv
+import os
 from django.conf import settings
+
+
+load_dotenv()
+OPENAI_API_KEY = os.getenv('OPENAI_API_KEY')
 
 class MediaStreamConsumer(AsyncWebsocketConsumer):
     def __init__(self, *args, **kwargs):
@@ -19,7 +25,7 @@ class MediaStreamConsumer(AsyncWebsocketConsumer):
         self.openai_ws = await websockets.connect(
             'wss://api.openai.com/v1/realtime?model=gpt-4o-mini-realtime-preview-2024-10-01',
             extra_headers={
-                'Authorization': f'Bearer {settings.OPENAI_API_KEY}',
+                'Authorization': f'Bearer {OPENAI_API_KEY}',
                 'OpenAI-Beta': 'realtime=v1',
             }
         )
