@@ -17,7 +17,7 @@ class MediaStreamConsumer(AsyncWebsocketConsumer):
     async def connect(self):
         await self.accept()
         self.openai_ws = await websockets.connect(
-            'wss://api.openai.com/v1/realtime?model=gpt-4o-realtime-preview-2024-10-01',
+            'wss://api.openai.com/v1/realtime?model=gpt-4o-mini-realtime-preview-2024-10-01',
             extra_headers={
                 'Authorization': f'Bearer {settings.OPENAI_API_KEY}',
                 'OpenAI-Beta': 'realtime=v1',
